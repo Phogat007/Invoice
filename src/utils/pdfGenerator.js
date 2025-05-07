@@ -1,7 +1,8 @@
+
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-export const generatePDF = async (invoiceData, templateNumber) => {
+export const generatePDF = async (invoiceData, templateNumber, showQRCode = false, qrCodeOptions = {}) => {
   return new Promise(async (resolve, reject) => {
     try {
       const invoice = document.createElement('div');
@@ -12,7 +13,12 @@ export const generatePDF = async (invoiceData, templateNumber) => {
       const ReactDOMServer = (await import('react-dom/server')).default;
       const React = (await import('react')).default;
       
-      const invoiceElement = React.createElement(InvoiceTemplate, { data: invoiceData, templateNumber });
+      const invoiceElement = React.createElement(InvoiceTemplate, { 
+        data: invoiceData, 
+        templateNumber,
+        showQRCode,
+        qrCodeOptions
+      });
       const invoiceHTML = ReactDOMServer.renderToString(invoiceElement);
       
       invoice.innerHTML = invoiceHTML;

@@ -1,13 +1,14 @@
+
 import React from 'react';
 import { format } from 'date-fns';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-const Template9 = ({ data }) => {
+const Template9 = ({ data, showQRCode = false, qrCodeOptions = {} }) => {
   const { billTo = {}, shipTo = {}, invoice = {}, yourCompany = {}, items = [], taxPercentage = 0, taxAmount = 0, subTotal = 0, grandTotal = 0, notes = '' } = data || {};
 
   return (
-    <BaseTemplate data={data}>
+    <BaseTemplate data={data} showQRCode={showQRCode} qrCodeOptions={qrCodeOptions}>
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
